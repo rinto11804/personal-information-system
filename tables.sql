@@ -1,37 +1,37 @@
 CREATE TABLE employee IF NOT EXISTS (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
-    department_id INT NOT NULL,
-    contact_id INT NOT NULL,
-    FOREIGN KEY(department_id) REFERENCES department(id)
-    FOREIGN KEY(contact_id) REFERENCES contact(id)
+    departmentId INT NOT NULL,
+    contactId INT NOT NULL,
+    FOREIGN KEY(departmentId) REFERENCES department(id),
+    FOREIGN KEY(contactId) REFERENCES contact(id)
 )
 
 CREATE TABLE contact IF NOT EXISTS (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    phone_number VARCHAR(20) NOT NULL,
-    city VARCHAR(50) NOT NULL,
+    phoneNumber VARCHAR(20) NOT NULL,
+    city VARCHAR(50) NOT NULL
 )
 
 CREATE TABLE department IF NOT EXISTS (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
-    manager_id INT NOT NULL,
-    FOREIGN KEY(manager_id) REFERENCES employee(id)
+    managerId INT NOT NULL,
+    FOREIGN KEY(managerId) REFERENCES employee(id)
 )
 
 CREATE TABLE project IF NOT EXISTS (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
-    budget FLOAT NOT NULL
+    startDate DATE NOT NULL
 )
 
 CREATE TABLE employee_project_link IF NOT EXISTS (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    employee_id INT NOT NULL,
-    project_id INT NOT NULL,
-    FOREIGN KEY(employee_id) REFERENCES employee(id)
-    FOREIGN KEY(project_id) REFERENCES project(id)
+    employeeId INT NOT NULL,
+    projectId INT NOT NULL,
+    FOREIGN KEY(employeeId) REFERENCES employee(id),
+    FOREIGN KEY(projectId) REFERENCES project(id)
 )
 
 
