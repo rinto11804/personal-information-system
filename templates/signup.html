@@ -1,0 +1,31 @@
+<!-- templates/signup.html -->
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<div class="signup-container">
+  <form class="signup-form" method="POST" action="{{ url_for('signup') }}">
+    <h2>Sign Up</h2>
+    <div class="input-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    <div class="input-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required>
+    </div>
+    <div class="role-selection">
+      <label>
+        <input type="radio" name="role" value="manager" required>
+        Manager
+      </label>
+      <label>
+        <input type="radio" name="role" value="employee">
+        Employee
+      </label>
+    </div>
+    <button type="submit" class="signup-button">Sign Up</button>
+  </form>
+</div>
+{% endblock %}
