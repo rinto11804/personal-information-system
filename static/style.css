@@ -86,17 +86,17 @@ h2 {
 }
 
 .form-footer {
-    margin-top: 1rem;
-    text-align: center;
-    color: #555555;
+  margin-top: 1rem;
+  text-align: center;
+  color: #555555;
 }
 
 .form-footer a {
-    color: #3b82f6;
-    text-decoration: none;
-    font-weight: 500;
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
 }
 
 .form-footer a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
