@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template
+from flask import render_template, request
 
 app = Flask(__name__)
 
@@ -14,8 +14,13 @@ def signup():
     return render_template("signup.html")
 
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
+    if request.method == "POST":
+        print(request.form)
+        email = request.form["email"]
+        password = request.form["password"]
+        return render_template("dashboard.html")
     return render_template("login.html")
 
 
