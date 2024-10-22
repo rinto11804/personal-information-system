@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-content responsive-wrapper">
+            <div class="header-logo">
+                <h2>Employee Profile</h2>
+            </div>
+            <div class="header-navigation">
+                <nav class="header-navigation-links">
+                    <a href="">Dashboard</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="responsive-wrapper">
+            <div class="card">
+                <div class="card-header">
+                    <h3>{{ employee.name }}</h3>
+                </div>
+                <div class="card-body">
+                    <p><strong>Email:</strong> {{ employee.email }}</p>
+                    <p><strong>Phone:</strong> {{ employee.phone }}</p>
+                    <p><strong>Position:</strong> {{ employee.position }}</p>
+                    <p><strong>Department:</strong> {{ employee.department }}</p>
+                    <p><strong>Address:</strong> {{ employee.address }}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="" class="button">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

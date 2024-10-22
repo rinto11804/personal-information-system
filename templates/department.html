@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departments</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-content responsive-wrapper">
+            <div class="header-logo">
+                <h2>Departments</h2>
+            </div>
+            <div class="header-navigation">
+                <nav class="header-navigation-links">
+                    <a href="">Home</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="responsive-wrapper">
+            <div class="content-main">
+                {% if departments %}
+                <h3>All Departments</h3>
+                <div class="card-grid">
+                    {% for department in departments %}
+                    <article class="card">
+                        <div class="card-header">
+                            <h3>{{ department.0 }}</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>{{ department.1 }}</p>
+                        </div>
+                    </article>
+                    {% endfor %}
+
+                </div>
+                {% endif %}
+
+                <div class="card" style="margin-top: 2rem;">
+                    <div class="card-header">
+                        <h3>Create New Department</h3>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            <label for="name">Department Name:</label>
+                            <input type="text" id="name" name="name" placeholder="Enter department name" required>
+
+                            <label for="description">Description:</label>
+                            <textarea id="description" name="description" rows="4"
+                                placeholder="Enter department description" required></textarea>
+
+                            <div class="card-footer">
+                                <button type="submit" class="button">Add Department</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

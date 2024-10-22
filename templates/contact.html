@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Contacts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-content responsive-wrapper">
+            <div class="header-logo">
+                <h2>Employee Contacts</h2>
+            </div>
+            <div class="header-navigation">
+                <nav class="header-navigation-links">
+                    <a href="#"> Home </a>
+                    <a href="#"> Employees </a>
+                    <a href="#"> Settings </a>
+                </nav>
+                <div class="header-navigation-actions">
+                    <a href="#" class="avatar">
+                        <img src="https://assets.codepen.io/285131/hat-man.png" alt="User Avatar" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="responsive-wrapper">
+            <div class="content-main">
+                <div class="content-header">
+                    <div class="content-header-intro">
+                        <h2>Employee Details</h2>
+                        <p>Filter and manage the details of employees.</p>
+                    </div>
+                </div>
+
+                <!-- Filter Form -->
+                <form method="get" class="card" action="">
+                    <div class="card-body">
+                        <label for="department">Department:</label>
+                        <select id="department" name="department">
+                            <option value="" selected>All Departments</option>
+                            {% for dept in departments %}
+                            <option value="{{ dept }}" {% if dept==selected_department %}selected{% endif %}>{{ dept }}
+                            </option>
+                            {% endfor %}
+                        </select>
+
+                        <label for="position">Position:</label>
+                        <input type="text" id="position" name="position" placeholder="Enter position"
+                            value="{{ selected_position }}">
+
+                        <label for="name">Employee Name:</label>
+                        <input type="text" id="name" name="name" placeholder="Enter employee name"
+                            value="{{ selected_name }}">
+
+                        <div class="card-footer">
+                            <button type="submit" class="button">Filter</button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Employee List -->
+                <div class="card-grid">
+                    {% for employee in employees %}
+                    <article class="card">
+                        <div class="card-header">
+                            <h3>{{ employee.name }}</h3>
+                            <span class="badge default">{{ employee.department }}</span>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Email:</strong> {{ employee.email }}</p>
+                            <p><strong>Phone:</strong> {{ employee.phone }}</p>
+                            <p><strong>Position:</strong> {{ employee.position }}</p>
+                            <p><strong>Address:</strong> {{ employee.address }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ url_for('edit_employee', id=employee.id) }}" class="button">Edit</a>
+                        </div>
+                    </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

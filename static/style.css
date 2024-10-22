@@ -100,3 +100,35 @@ h2 {
 .form-footer a:hover {
   text-decoration: underline;
 }
+
+.input-group {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  color: var(--c-text-secondary);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.input-group select {
+  padding: 0.75rem;
+  background-color: var(--c-gray-800);
+  color: var(--c-text-primary);
+  border: 1px solid #9c9a9af9;
+  border-radius: 6px;
+  appearance: none;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.input-group select:focus {
+  outline: none;
+  border-color: var(--c-green-500);
+}
+
+.input-group select option {
+  background-color: var(--c-gray-900);
+  color: var(--c-text-primary);
+}

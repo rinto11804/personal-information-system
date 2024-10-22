@@ -8,8 +8,8 @@
   <form class="signup-form" method="POST" action="{{ url_for('signup') }}">
     <h2>Sign Up</h2>
     <div class="input-group">
-      <label for="username">Username</label>
-      <input type="text" id="username" name="username" required>
+      <label for="name">Username</label>
+      <input type="text" id="name" name="name" required>
     </div>
     <div class="input-group">
       <label for="email">Email</label>
@@ -19,9 +19,19 @@
       <label for="password">Password</label>
       <input type="password" id="password" name="password" required>
     </div>
+    <div class="input-group">
+      <label for="department">Department</label>
+      <select id="department" name="department" required>
+        <option value="" disabled selected>Select a department</option>
+        {% for department in context.departments %}
+        <option value="{{ department.0 }}">{{ department.1 }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
     <div class="role-selection">
       <label>
-        <input type="radio" name="role" value="manager" required>
+        <input type="radio" name="role" value="manager">
         Manager
       </label>
       <label>
@@ -29,6 +39,7 @@
         Employee
       </label>
     </div>
+    <p>{{ context.msg }}</p>
     <button type="submit" class="signup-button">Sign Up</button>
   </form>
 </div>

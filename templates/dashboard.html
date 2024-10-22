@@ -16,9 +16,9 @@
             </div>
             <div class="header-navigation">
                 <nav class="header-navigation-links">
-                    <a href="#"> Projects </a>
-                    <a href="#"> Tasks </a>
-                    <a href="#"> Remainder </a>
+                    <a href="{{ url_for('dashboard') }}">Home</a>
+                    <a href="{{ url_for('departments_page') }}"> Departments </a>
+                    <a href="{{ url_for('create_contact') }}"> Employee/Contact </a>
                 </nav>
                 <div class="header-navigation-actions">
                     <a href="#" class="avatar">
@@ -31,6 +31,7 @@
                 <span>Menu</span>
             </a>
         </div>
+
     </header>
     <main class="main">
         <div class="responsive-wrapper">
@@ -57,50 +58,89 @@
             </div> -->
             <div class="">
                 <h2 style="text-decoration: underline;">Projects</h2>
+                <button class="button" id="open-modal-button">
+                    <span>Create Project</span>
+                </button>
                 <div class="content-main">
                     <div class="card-grid">
+                        {% for project in context.projects %}
                         <article class="card">
                             <div class="card-header">
-                                <h3>Project 1</h3>
-                                <span class="badge default">medium</span>
+                                <h3>{{project.1}}</h3>
+                                <span class="badge default">{{project.3}}</span>
                             </div>
                             <div class="card-body">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, eos. Corrupti
-                                    repellendus neque, quidem vero, minima omnis atque accusamus maxime dolorem a fugit
-                                    corporis quis inventore vel molestiae iure quam.</p>
+                                <p>{{project.2}}</p>
+                                <p><span>Deadline:</span>{{project.4}}</p>
                             </div>
-
                         </article>
-                        <article class="card">
-                            <div class="card-header">
-                                <h3>Project 2</h3>
-                                <span class="badge red">high</span>
-                            </div>
-                            <div class="card-body">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, eos. Corrupti
-                                    repellendus neque, quidem vero, minima omnis atque accusamus maxime dolorem a fugit
-                                    corporis quis inventore vel molestiae iure quam.</p>
-                            </div>
-
-                        </article>
-                        <article class="card">
-                            <div class="card-header">
-                                <h3>Project 3</h3>
-                                <span class="badge green">low</span>
-                            </div>
-                            <div class="card-body">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, eos. Corrupti
-                                    repellendus neque, quidem vero, minima omnis atque accusamus maxime dolorem a fugit
-                                    corporis quis inventore vel molestiae iure quam.</p>
-                            </div>
-
-                        </article>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
     </main>
+    <!-- Modal for Creating Project -->
+    <div class="modal" id="create-project-modal" style="padding:1rem;">
+        <div class="modal-content card">
+            <div class="card-header">
+                <h3>Create Project</h3>
+                <button class="icon-button" id="close-modal-button">
+                    <i class="ph-x">X</i> <!-- Replace with an appropriate icon or text 'X' -->
+                </button>
+            </div>
+            <div class="card-body">
+                <form method="post" action="{{ url_for('dashboard')}}">
+                    <label for="name">Project Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter project name" required>
 
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" rows="4" placeholder="Enter project description"
+                        required></textarea>
+
+                    <label for="priority">Priority:</label>
+                    <select id="priority" name="priority" required>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+
+                    <label for="deadline">Deadline:</label>
+                    <input type="date" id="deadline" name="deadline" required>
+
+                    <label for="priority">Department:</label>
+                    <select id="department" name="department" required>
+                        <option value="" disabled selected>Select a department</option>
+                        {% for department in context.departments %}
+                        <option value="{{ department.0 }}">{{ department.1 }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <button type="submit" class="button">Create Project</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const openModalButton = document.getElementById('open-modal-button');
+        const closeModalButton = document.getElementById('close-modal-button');
+        const modal = document.getElementById('create-project-modal');
+
+        openModalButton.addEventListener('click', () => {
+            modal.classList.add('active');
+        });
+
+        closeModalButton.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 
 </html>
